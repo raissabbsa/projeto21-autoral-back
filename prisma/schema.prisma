@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model absences {
+  id        Int      @id @default(autoincrement())
+  amount    Int
+  subjectId Int
+  createdAt DateTime @default(now()) @db.Date
+  subjects  subjects @relation(fields: [subjectId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model schedules {
+  id        Int      @id @default(autoincrement())
+  startTime String
+  endTime   String
+  subjectId Int
+  weekdayId Int
+  createdAt DateTime @default(now()) @db.Date
+  subjects  subjects @relation(fields: [subjectId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  weekdays  weekdays @relation(fields: [weekdayId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model sessions {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  token     String   @unique
+  createdAt DateTime @default(now()) @db.Date
+  users     users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model subjects {
+  id        Int         @id @default(autoincrement())
+  name      String
+  userId    Int
+  average   Int
+  createdAt DateTime    @default(now()) @db.Date
+  users     users       @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  absences  absences[]
+  schedules schedules[]
+  tests     tests[]
+}
+
+model tasks {
+  id        Int      @id @default(autoincrement())
+  name      String
+  userId    Int
+  weekdayId Int
+  finished  Boolean?
+  createdAt DateTime @default(now()) @db.Date
+  users     users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  weekdays  weekdays @relation(fields: [weekdayId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model tests {
+  id        Int      @id @default(autoincrement())
+  name      String
+  grade     Int?
+  date      String
+  subjectId Int
+  createdAt DateTime @default(now()) @db.Date
+  subjects  subjects @relation(fields: [subjectId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model users {
+  id        Int        @id @default(autoincrement())
+  name      String
+  email     String     @unique
+  password  String
+  createdAt DateTime   @default(now()) @db.Date
+  sessions  sessions[]
+  subjects  subjects[]
+  tasks     tasks[]
+}
+
+model weekdays {
+  id        Int         @id @default(autoincrement())
+  name      String
+  schedules schedules[]
+  tasks     tasks[]
+}
