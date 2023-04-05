@@ -1,7 +1,7 @@
 import { AuthenticatedRequest } from "@/middlewares/authentication-middleware";
 import { subjectSchema } from "@/schemas/subject-schemas";
 import subjectService from "@/services/subject-service";
-import { Request, Response } from "express";
+import { Response } from "express";
 import httpStatus from "http-status";
 
 export async function postSubject(req: AuthenticatedRequest, res: Response) {

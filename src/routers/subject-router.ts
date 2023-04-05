@@ -5,8 +5,8 @@ import { Router } from 'express';
 const subjectRouter = Router();
 
 subjectRouter
-    // .all("/*", authenticateToken)
+    .all("/*", authenticateToken)
     .post('/', postSubject)
-    .get('/', getSubject);
+    .get('/subject', getSubject);
 
 export { subjectRouter };
