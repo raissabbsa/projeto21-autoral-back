@@ -5,8 +5,7 @@ import { taskSchema } from "@/schemas/task-schema";
 import taskService from "@/services/task-service";
 
 export async function postTask(req: AuthenticatedRequest, res: Response) {
-//   const { userId } = req;
-const userId = 1;
+  const { userId } = req;
   const { name, weekdayId } = req.body;
   const { error } = taskSchema.validate(req.body, { abortEarly: false });
 

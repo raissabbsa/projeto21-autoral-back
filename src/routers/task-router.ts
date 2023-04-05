@@ -5,7 +5,7 @@ import { Router } from 'express';
 const taskRouter = Router();
 
 taskRouter
-    // .all("/*", authenticateToken)
+    .all("/*", authenticateToken)
     .post('/', postTask)
     .get('/:weekdayId', getTasks)
     .put('/:taskId', putTasks);
