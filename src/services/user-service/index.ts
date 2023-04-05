@@ -1,11 +1,7 @@
 import userRepository from "@/repositories/user-repository";
 import bcrypt from "bcrypt";
 
-export async function createUser(
-  name: string,
-  email: string,
-  password: string
-) {
+async function createUser(name: string, email: string, password: string) {
   const existEmail = await userRepository.verifyEmail(email);
   if (existEmail) throw "Conflict";
 

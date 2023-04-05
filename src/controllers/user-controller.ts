@@ -2,7 +2,7 @@ import userService from "@/services/user-service";
 import { Request, Response } from "express";
 import httpStatus from "http-status";
 
-export async function singOut(req: Request, res: Response) {
+export async function register(req: Request, res: Response) {
   const { name, email, password } = req.body;
   try {
     await userService.createUser(name, email, password);
