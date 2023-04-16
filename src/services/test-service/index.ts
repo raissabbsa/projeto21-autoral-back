@@ -1,9 +1,6 @@
 import testRepository from "@/repositories/test-repository";
 
 async function verifyPostTest(name: string, date: string, subjectId: number) {
-    const existName = await testRepository.verifyTestname(name);
-    if (existName) throw { name: "Conflict" };
-
     const existSubject = await testRepository.verifysubject(subjectId);
     if (!existSubject) throw { name: "Not Found" };
 

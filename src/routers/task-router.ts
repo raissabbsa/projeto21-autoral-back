@@ -5,10 +5,10 @@ import { Router } from 'express';
 const taskRouter = Router();
 
 taskRouter
+    .put('/finished/:taskId', putTasks)
     .all("/*", authenticateToken)
     .post('/', postTask)
-    .get('/:weekdayId', getTasks)
-    .put('/:taskId', putTasks);
+    .get('/:weekdayId', getTasks);
 
 
 export { taskRouter };

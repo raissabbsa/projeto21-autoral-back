@@ -11,6 +11,7 @@ async function signIn(email: string, password: string) {
   return {
     name: user.name,
     email: user.email,
+    userId: user.id,
     token,
   };
 

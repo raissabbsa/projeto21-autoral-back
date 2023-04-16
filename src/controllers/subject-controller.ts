@@ -20,9 +20,6 @@ export async function postSubject(req: AuthenticatedRequest, res: Response) {
     await subjectService.verifyPostSubject(name, userId, average);
     return res.sendStatus(httpStatus.CREATED);
   } catch (error) {
-    if (error.name === "Conflict") {
-      return res.status(httpStatus.CONFLICT).send(error);
-    }
     return res.status(httpStatus.BAD_REQUEST).send(error);
   }
 }

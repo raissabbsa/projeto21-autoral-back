@@ -16,9 +16,7 @@ export async function postTest(req: AuthenticatedRequest, res: Response) {
     await testService.verifyPostTest(name, date, subjectId);
     return res.sendStatus(httpStatus.CREATED);
   } catch (error) {
-    if (error.name === "Conflict") {
-      return res.status(httpStatus.CONFLICT).send(error);
-    } else if (error.name === "Not Found") {
+    if (error.name === "Not Found") {
       return res.status(httpStatus.NOT_FOUND).send(error);
     }
     return res.status(httpStatus.BAD_REQUEST).send(error);

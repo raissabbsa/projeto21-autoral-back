@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test jest --passWithNoTests --runInBand",
+    "build": "tsc",
+    "start": "npm run prisma:migrate:deploy && node dist/src/server.js",
+    "test": "dotenv -e .env.test npm run prisma:migrate:deploy & dotenv -e .env.test jest -- -i",
+    "prisma:migrate:deploy": "prisma migrate deploy",
+    "prisma:migrate:dev": "prisma migrate dev",
     "test:unit": "NODE_ENV=test jest --passWithNoTests --runInBand tests/unit",
     "test:integration": "NODE_ENV=test jest --passWithNoTests --runInBand tests/integration",
     "test:coverage": "NODE_ENV=test jest --passWithNoTests --runInBand --coverage --collectCoverageFrom='./src/**'",

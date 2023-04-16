@@ -7,6 +7,6 @@ const subjectRouter = Router();
 subjectRouter
     .all("/*", authenticateToken)
     .post('/', postSubject)
-    .get('/subject', getSubject);
+    .get('/', getSubject);
 
 export { subjectRouter };

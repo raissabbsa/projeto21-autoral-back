@@ -22,10 +22,11 @@ async function updateTask(taskId: number) {
     }); 
 }
 
-async function findTasks(weekdayId: number) {
+async function findTasks(weekdayId: number, userId: number) {
     return prisma.tasks.findMany({
         where: {
-            weekdayId
+            weekdayId,
+            userId
         }
     }) ;
 }

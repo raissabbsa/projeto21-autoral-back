@@ -4,8 +4,8 @@ async function verifyPostTasks(name: string, weekdayId: number, userId: number) 
     await taskRepository.createTask(name, weekdayId, userId);
 }
 
-async function verifyGetTasks(weekdayId: number) {
-    const tasks = await taskRepository.findTasks(weekdayId);
+async function verifyGetTasks(weekdayId: number, userId: number) {
+    const tasks = await taskRepository.findTasks(weekdayId, userId);
     return tasks;
 }
 

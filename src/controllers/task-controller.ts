@@ -23,8 +23,10 @@ export async function postTask(req: AuthenticatedRequest, res: Response) {
 
 export async function getTasks(req: AuthenticatedRequest, res: Response) {
     const weekdayId: string = req.params.weekdayId;
+    const { userId } = req;
+
     try {
-      const tasks = await taskService.verifyGetTasks(Number(weekdayId));
+      const tasks = await taskService.verifyGetTasks(Number(weekdayId), userId);
       return res.status(httpStatus.OK).send(tasks);
     } catch (error) {
       if (error.name === "Not Found") {

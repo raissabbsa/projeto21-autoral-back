@@ -5,9 +5,6 @@ async function verifyPostSubject(
   userId: number,
   average: number
 ) {
-  const existName = await subjectRepository.verifyname(name);
-  if (existName) throw { name: "Conflict" };
-
   const subject = await subjectRepository.createSubject(name, userId, average);
   console.log(subject);
   return subject;
